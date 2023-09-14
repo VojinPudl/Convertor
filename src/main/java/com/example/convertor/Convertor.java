@@ -8,9 +8,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.ToolBar;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class Convertor {
 
@@ -48,9 +50,10 @@ public class Convertor {
     }
 
     public void Convert() {
-        if (PathTextField == null){
+        if (PathTextField.getText().isEmpty()){
             System.out.println("Null");
+        } else {
+            System.out.println("Not Null");
         }
-        System.out.println("Not null");
     }
 }
