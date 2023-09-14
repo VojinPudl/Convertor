@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="124.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.convertor.Convertor">
+    <stylesheets>
+        <URL value="@../convertor/style.css" />
+    </stylesheets>
+    <BorderPane prefHeight="127.0" prefWidth="600.0">
+        <top>
+            <MenuBar style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
+                <Menu mnemonicParsing="false" text="File">
+                    <MenuItem fx:id="CloseItem" mnemonicParsing="false" onAction="#Close" text="Close" />
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem fx:id="HelpItem" mnemonicParsing="false" onAction="#OpenHelp" text="About" />
+                </Menu>
+            </MenuBar>
+        </top>
+        <left>
+            <VBox prefHeight="375.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+                <ToolBar prefHeight="40.0" prefWidth="600.0" style="-fx-background-color: dimgray;">
+                    <TextField fx:id="PathTextField" prefHeight="26.0" prefWidth="473.0" promptText="C:\Users\user\Downloads" style="-fx-background-color: lightgray;" />
+                    <Button fx:id="OpenButton" mnemonicParsing="false" onAction="#OpenFIleSystem" style="-fx-background-color: lightgrey;" text="Open" />
+                    <Button fx:id="ConvertButton" mnemonicParsing="false" onAction="#Convert" style="-fx-background-color: lightgray;" text="Convert" />
+                </ToolBar>
+                <TabPane prefHeight="63.0" prefWidth="600.0" style="-fx-background-color: lightgray;" tabClosingPolicy="UNAVAILABLE">
+                    <Tab text="Video">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="600.0">
+                            <VBox prefHeight="36.0" prefWidth="600.0">
+                                <ToolBar fx:id="toolBarVideo" prefHeight="111.0" prefWidth="600.0" style="-fx-background-color: dimgray;">
+                                    <Label text="New File Type:" />
+                                </ToolBar>
+                            </VBox>
+                        </AnchorPane>
+                    </Tab>
+                    <Tab text="Audio">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <VBox prefHeight="35.0" prefWidth="600.0">
+                                <ToolBar fx:id="toolBarAudio" prefHeight="35.0" prefWidth="364.0" style="-fx-background-color: dimgrey;">
+                                    <Label text="New File Type:" />
+                                </ToolBar>
+                            </VBox>
+                        </AnchorPane>
+                    </Tab>
+                </TabPane>
+            </VBox>
+        </left>
+    </BorderPane>
+</AnchorPane>
