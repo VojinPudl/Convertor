@@ -1,6 +1,5 @@
 package com.example.convertor;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -9,7 +8,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.ArrayList;
 
 public class Convertor {
 
@@ -49,7 +47,7 @@ public class Convertor {
 
     public void Convert() {
         if (!PathTextField.getText().isEmpty()){
-            String fileType = null;
+            String fileType;
             if (videocChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(0)) {
                 fileType = videocChoiceBox.getValue().toString();
             } else if (audioChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(1)){

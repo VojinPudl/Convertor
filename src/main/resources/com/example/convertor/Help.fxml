@@ -4,8 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <TextArea editable="false" prefHeight="400.0" prefWidth="600.0" text="Convertor&#10;------------------------------------------------------------------------------------------------------------------------&#10;Click on Open button to choose your file." />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1">
+   <TextArea editable="false" prefHeight="400.0" prefWidth="600.0"
+             text="Convertor&#10;------------------------------------------------------------------------------------------------------------------------&#10;Click on Open button to choose your file."/>
 </AnchorPane>
