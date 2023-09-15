@@ -58,6 +58,11 @@ public class Convertor {
                 return;
             }
             System.out.println(fileType);
+            Path path = Path.of(PathTextField.getText());
+            String[] temp = path.getFileName().toString().split("\\.");
+            String newfile = temp[0]+fileType;
+            System.out.println(newfile);
+
         } else {
             System.out.println("Path is empty!");
         }
