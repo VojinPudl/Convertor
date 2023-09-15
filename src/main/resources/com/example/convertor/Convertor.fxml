@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import java.net.*?>
+<?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -26,12 +28,21 @@
                     <Button fx:id="OpenButton" mnemonicParsing="false" onAction="#OpenFIleSystem" style="-fx-background-color: lightgrey;" text="Open" />
                     <Button fx:id="ConvertButton" mnemonicParsing="false" onAction="#Convert" style="-fx-background-color: lightgray;" text="Convert" />
                 </ToolBar>
-                <TabPane prefHeight="63.0" prefWidth="600.0" style="-fx-background-color: lightgray;" tabClosingPolicy="UNAVAILABLE">
+                <TabPane fx:id="tabPaneFIleType" prefHeight="63.0" prefWidth="600.0" style="-fx-background-color: lightgray;" tabClosingPolicy="UNAVAILABLE">
                     <Tab text="Video">
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="66.0" prefWidth="600.0">
                             <VBox prefHeight="36.0" prefWidth="600.0">
                                 <ToolBar fx:id="toolBarVideo" prefHeight="111.0" prefWidth="600.0" style="-fx-background-color: dimgray;">
                                     <Label text="New File Type:" />
+                           <ChoiceBox fx:id="videocChoiceBox" prefWidth="150.0">
+                                <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                        <String fx:value=".mp4" />
+                                        <String fx:value=".avi" />
+                                        <String fx:value=".mkv" />
+                                    </FXCollections>
+                                </items>
+                           </ChoiceBox>
                                 </ToolBar>
                             </VBox>
                         </AnchorPane>
@@ -41,6 +52,15 @@
                             <VBox prefHeight="35.0" prefWidth="600.0">
                                 <ToolBar fx:id="toolBarAudio" prefHeight="35.0" prefWidth="364.0" style="-fx-background-color: dimgrey;">
                                     <Label text="New File Type:" />
+                                    <ChoiceBox fx:id="audioChoiceBox" prefWidth="150.0">
+                                        <items>
+                                            <FXCollections fx:factory="observableArrayList">
+                                                <String fx:value=".mp3" />
+                                                <String fx:value=".ogg" />
+                                                <String fx:value=".flac" />
+                                            </FXCollections>
+                                        </items>
+                                    </ChoiceBox>
                                 </ToolBar>
                             </VBox>
                         </AnchorPane>

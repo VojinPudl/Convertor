@@ -1,18 +1,15 @@
 package com.example.convertor;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Objects;
+import java.util.ArrayList;
 
 public class Convertor {
 
@@ -23,8 +20,9 @@ public class Convertor {
     public Button OpenButton;
     public ToolBar toolBarVideo;
     public ToolBar toolBarAudio;
-
-
+    public ChoiceBox videocChoiceBox;
+    public ChoiceBox audioChoiceBox;
+    public TabPane tabPaneFIleType;
 
     public void Close() {
         System.exit(0);
@@ -50,10 +48,18 @@ public class Convertor {
     }
 
     public void Convert() {
-        if (PathTextField.getText().isEmpty()){
-            System.out.println("Null");
+        if (!PathTextField.getText().isEmpty()){
+            String fileType = null;
+            if (videocChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(0)) {
+                fileType = videocChoiceBox.getValue().toString();
+            } else if (audioChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(1)){
+                fileType = audioChoiceBox.getValue().toString();
+            } else {
+                return;
+            }
+            System.out.println(fileType);
         } else {
-            System.out.println("Not Null");
+            System.out.println("Path is empty!");
         }
     }
 }
