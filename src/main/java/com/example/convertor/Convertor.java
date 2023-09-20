@@ -58,16 +58,13 @@ public class Convertor {
             String newfile = temp[0] + fileType;
             System.out.println("Full Path: " + path);
             System.out.println("Folder Path: " + path.getParent());
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run(){
-                    try {
-                        Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() +  " && "
-                                + "ffmpeg -i " + path.getFileName() + " " + newfile);
-                        process.waitFor();
-                    } catch (IOException | InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
+            Thread thread = new Thread(() -> {
+                try {
+                    Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() + " && "
+                            + "ffmpeg -i " + path.getFileName() + " " + newfile);
+                    process.waitFor();
+                } catch (IOException | InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             });
             thread.start();
