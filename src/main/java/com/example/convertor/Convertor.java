@@ -41,25 +41,37 @@ public class Convertor {
         fileChooser.setTitle("Vyber Soubor");
         Path path = fileChooser.showOpenDialog(new Stage()).toPath();
         PathTextField.setText(String.valueOf(path));
-
-
     }
 
     public void Convert() {
-        if (!PathTextField.getText().isEmpty()){
+        if (!PathTextField.getText().isEmpty()) {
             String fileType;
             if (videocChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(0)) {
                 fileType = videocChoiceBox.getValue().toString();
-            } else if (audioChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(1)){
+            } else if (audioChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(1)) {
                 fileType = audioChoiceBox.getValue().toString();
             } else {
                 return;
             }
-            System.out.println(fileType);
             Path path = Path.of(PathTextField.getText());
             String[] temp = path.getFileName().toString().split("\\.");
-            String newfile = temp[0]+fileType;
-            System.out.println(newfile);
+            String newfile = temp[0] + fileType;
+            System.out.println("Full Path: " + path);
+            System.out.println("Folder Path: " + path.getParent());
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run(){
+                    try {
+                        Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() +  " && "
+                                + "ffmpeg -i " + path.getFileName() + " " + newfile);
+                        process.waitFor();
+                    } catch (IOException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            });
+            thread.start();
+
 
         } else {
             System.out.println("Path is empty!");
