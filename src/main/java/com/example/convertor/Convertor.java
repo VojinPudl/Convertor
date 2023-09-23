@@ -3,14 +3,15 @@ package com.example.convertor;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class Convertor {
-
     public TextField PathTextField;
     public Button ConvertButton;
     public MenuItem CloseItem;
@@ -21,6 +22,8 @@ public class Convertor {
     public ChoiceBox videocChoiceBox;
     public ChoiceBox audioChoiceBox;
     public TabPane tabPaneFIleType;
+    Image image = new Image(Objects.requireNonNull(getClass()
+            .getResourceAsStream("/com/example/convertor/Image/logo.png")));
 
     public void Close() {
         System.exit(0);
@@ -32,6 +35,8 @@ public class Convertor {
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setResizable(false);
         stage.setTitle("Hello!");
+        stage.getIcons().add(image);
+        stage.setAlwaysOnTop(true);
         stage.setScene(scene);
         stage.show();
     }
@@ -39,10 +44,12 @@ public class Convertor {
     public Stage OpenLoading() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Loading.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        Scene scene = new Scene(fxmlLoader.load(), 200, 50);
         stage.setResizable(false);
-        stage.setTitle("Hello!");
+        stage.setTitle("");
         stage.setScene(scene);
+        stage.getIcons().add(image);
+        stage.setAlwaysOnTop(true);
         stage.show();
         return stage;
     }
@@ -54,7 +61,7 @@ public class Convertor {
         PathTextField.setText(String.valueOf(path));
     }
 
-    public void Convert() throws IOException {
+    public void Convert() throws IOException, InterruptedException {
         if (!PathTextField.getText().isEmpty()) {
             String fileType;
             if (videocChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(0)) {
@@ -71,18 +78,9 @@ public class Convertor {
             System.out.println("Folder Path: " + path.getParent());
             Stage stage = OpenLoading();
             stage.show();
-            Thread thread = new Thread(() -> {
-                try {
-                    Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() + " && "
+            Process process = Runtime.getRuntime().exec("cmd.exe /c cd " + path.getParent() + " && "
                             + "ffmpeg -i " + path.getFileName() + " " + newfile);
-                    process.waitFor();
-                } catch (IOException | InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
-            });
-            thread.start();
-            stage.close();
-            System.out.println("Done");
+            process.waitFor();
         } else {
             System.out.println("Path is empty!");
         }
