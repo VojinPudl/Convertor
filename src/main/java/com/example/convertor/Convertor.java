@@ -36,6 +36,17 @@ public class Convertor {
         stage.show();
     }
 
+    public Stage OpenLoading() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Loading.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+        stage.setResizable(false);
+        stage.setTitle("Hello!");
+        stage.setScene(scene);
+        stage.show();
+        return stage;
+    }
+
     public void OpenFIleSystem() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Vyber Soubor");
@@ -43,7 +54,7 @@ public class Convertor {
         PathTextField.setText(String.valueOf(path));
     }
 
-    public void Convert() {
+    public void Convert() throws IOException {
         if (!PathTextField.getText().isEmpty()) {
             String fileType;
             if (videocChoiceBox.getValue() != null && tabPaneFIleType.getSelectionModel().isSelected(0)) {
@@ -58,6 +69,8 @@ public class Convertor {
             String newfile = temp[0] + fileType;
             System.out.println("Full Path: " + path);
             System.out.println("Folder Path: " + path.getParent());
+            Stage stage = OpenLoading();
+            stage.show();
             Thread thread = new Thread(() -> {
                 try {
                     Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() + " && "
@@ -68,8 +81,8 @@ public class Convertor {
                 }
             });
             thread.start();
-
-
+            stage.close();
+            System.out.println("Done");
         } else {
             System.out.println("Path is empty!");
         }
