@@ -6,7 +6,9 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Path;
 
 public class Convertor {
@@ -58,16 +60,22 @@ public class Convertor {
             String newfile = temp[0] + fileType;
             System.out.println("Full Path: " + path);
             System.out.println("Folder Path: " + path.getParent());
-            Thread thread = new Thread(() -> {
-                try {
-                    Process process = Runtime.getRuntime().exec("cmd.exe /k cd " + path.getParent() + " && "
-                            + "ffmpeg -i " + path.getFileName() + " " + newfile);
-                    process.waitFor();
-                } catch (IOException | InterruptedException e) {
-                    throw new RuntimeException(e);
+
+            ProcessBuilder processBuilder = new ProcessBuilder("cmd.exe","/c","cd "  + path.getParent()
+                    ,"ffmpeg -i " + path.getFileName() + " " + newfile);
+            try {
+                Process process = processBuilder.start();
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+                String line;
+                while (true){
+                    line = bufferedReader.readLine();
+                    if (line == null)
+                        break;
+                    System.out.println(line);
                 }
-            });
-            thread.start();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 
         } else {
