@@ -72,6 +72,7 @@ public class Convertor {
                     if (line == null)
                         break;
                     System.out.println(line);
+                    System.out.println();
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
